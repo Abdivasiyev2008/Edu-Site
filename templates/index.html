@@ -1,0 +1,23 @@
+{% extends 'base.html'%}
+{% load static %}
+
+{% block content %}
+
+    <center><h2 class="hero_box_title">Barcha Kurslar</h2></center>
+    <div class="row row-cols-1 row-cols-md-3 g-4">
+        {% for playlist in playlistlar %}
+            <div class="col">
+                <div class="card">
+                    <img src="{{ playlist.image.url }}" class="card-img-top" alt="...">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ playlist.nomi }}</h5>
+                        <p class="card-text">{{ playlist.about|slice:':400'|safe }}</p>
+                        <b><p class="card-text">Narxi: {{ playlist.count | floatformat:3 }} UZS</p></b>
+                        <a href="{% url 'playlist-detail'  playlist.id %}" class="btn btn-outline-primary">Ko'rish</a>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+
+{% endblock content %}

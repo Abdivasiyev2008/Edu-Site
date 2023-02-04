@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+	{% if user.is_superuser %}
+	
+		<h1>Videolar</h1>
+
+		<div class="card mb-3">
+			<video controls>
+				<source src='{{ video.video.url }}'  type='video/mp4'>
+			</video>
+
+			<div class="card-body">
+			<h5 class="card-title">{{video.nomi}}</h5>
+			<p class="card-text">{{ video.izoh | safe }}</p>
+			</div>
+		</div>
+
+		<h3>Keyingi Darslar</h3>
+		
+		<div class="row row-cols-1 row-cols-md-3 g-4">
+			{% for vid in videolar %}
+			<div class="col" style="width: 415px;">
+				<div class="card">
+					<video width='390'>										
+						<source src='{{ vid.video.url }}'  type='video/mp4'>
+					</video>
+					<div class="card-body">
+						<h5 class="card-title">{{ video.nomi}}</h5>
+						<p class="card-text">{{ video.izoh | safe }}</p>
+						<a href="{% url 'video' vid.id %}" class="btn btn-outline-primary">Ko'rish</a>
+					</div>
+				</div>
+			</div>
+			{% endfor %}
+		</div>
+
+	{% else %}
+		<center><h1>Siz Ushbu Kursni Sotib Olmagansiz <br> Sotib Olishni <a href="https://t.me/abdivasiyev2008">click</a></h1></center>
+	{% endif %}
+
+
+{% endblock content %}

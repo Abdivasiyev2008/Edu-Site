@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+   {% if user.is_superuser %}
+      <div class="row row-cols-1 row-cols-md-3 g-4">
+         {% for video in playlist.videodars_set.all %}
+            <div class="col">
+               <div class="card">
+                  <img src="{{ object.image.url }}" class="card-img-top" alt="...">
+                  <div class="card-body">
+                     <h5 class="card-title">{{ video.nomi}}</h5>
+                     <p class="card-text">{{ video.izoh | safe }}</p>
+                     <a href="{% url 'video' video.id %}" class="btn btn-outline-primary">Ko'rish</a>
+                  </div>
+               </div>
+            </div>
+         {% endfor %}
+      </div>
+
+   {% else %}
+      <center>
+         <div class="card text-bg-primary mb-3" style="max-width: 50rem;">
+            <div class="card-header">Kurs Haqida To'liq Ma'lumot</div>
+            <div class="card-body">
+               <p class="card-text">{{ object.about | safe }}</p>
+            </div>
+         </div>
+         
+      <h1>Siz Ushbu Kursni Sotib Olmagansiz <br> Sotib Olishni <a href="https://t.me/abdivasiyev2008">click</a></h1>
+
+      </center>
+   {% endif %}
+
+{% endblock content %}
